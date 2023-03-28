@@ -63,11 +63,11 @@ export default function Home() {
 					</View>
 					<ProviderSelect />
 					<SimilarMoviesFunction />
-					<View style={{ position: 'absolute', bottom: 2 }}>
-						<BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
-					</View>
 				</View>
 			</ScrollView>
+			<View style={{ position: 'absolute', bottom: 2 }}>
+				<BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
+			</View>
 		</View>
 	);
 }
