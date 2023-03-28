@@ -51,7 +51,7 @@ export default function SimilarMoviesFunction() {
 					justifyContent: 'center',
 					borderRadius: 5,
 					marginTop: 20,
-					marginBottom: 50
+					marginBottom: 70
 				}}
 				onPress={() => getSimilarMovies()}
 			>
