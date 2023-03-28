@@ -13,7 +13,7 @@ export default function Home() {
 			<SafeAreaView>
 				<ScrollView>
 					<StatusBar barStyle="light-content" />
-					<View style={{ alignContent: 'center', alignItems: 'center', marginTop: 80 }}>
+					<View style={{ alignContent: 'center', alignItems: 'center', marginTop: 10 }}>
 						<View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
 							<Ionicons name="film-outline" color="white" size={35} />
 							<Text style={{ color: 'white', fontSize: 30, fontWeight: 'bold' }}>ReelRecs</Text>
