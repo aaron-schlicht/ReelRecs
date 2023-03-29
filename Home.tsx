@@ -72,8 +72,8 @@ export default function Home() {
 						<SimilarMoviesFunction />
 					</View>
 				</ScrollView>
-				<View style={{ position: 'absolute', bottom: 0 }}>
-					<BannerAd unitId={TestIds.BANNER} size={BannerAdSize.BANNER} />
+				<View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', justifyContent: 'center' }}>
+					<BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
 				</View>
 			</SafeAreaView>
 		</View>
