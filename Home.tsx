@@ -10,7 +10,7 @@ export default function Home() {
 	const imagePath = require('./assets/tmdb.png');
 	return (
 		<View style={{ backgroundColor: '#1f2224', height: '100%' }}>
-			<SafeAreaView>
+			<SafeAreaView style={{ height: '100%' }}>
 				<ScrollView>
 					<StatusBar barStyle="light-content" />
 					<View style={{ alignContent: 'center', alignItems: 'center', marginTop: 10 }}>
@@ -72,8 +72,8 @@ export default function Home() {
 						<SimilarMoviesFunction />
 					</View>
 				</ScrollView>
-				<View style={{ position: 'absolute', bottom: 2 }}>
-					<BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
+				<View style={{ position: 'absolute', bottom: 0 }}>
+					<BannerAd unitId={TestIds.BANNER} size={BannerAdSize.BANNER} />
 				</View>
 			</SafeAreaView>
 		</View>
