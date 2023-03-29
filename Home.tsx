@@ -3,7 +3,6 @@ import SearchFunction from './SearchFunction';
 import SimilarMoviesFunction from './SimilarMoviesFunction';
 import ProviderSelect from './ProviderSelect';
 import { Ionicons } from '@expo/vector-icons';
-import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 import { SafeAreaView } from 'react-native';
 
 export default function Home() {
@@ -72,9 +71,6 @@ export default function Home() {
 						<SimilarMoviesFunction />
 					</View>
 				</ScrollView>
-				<View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', justifyContent: 'center' }}>
-					<BannerAd unitId={TestIds.BANNER} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} />
-				</View>
 			</SafeAreaView>
 		</View>
 	);
