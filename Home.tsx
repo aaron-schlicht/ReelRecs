@@ -25,27 +25,6 @@ export default function Home() {
 								style={{ width: 70, height: 20 }}
 							/>
 						</View>
-						<View
-							style={{
-								width: '80%',
-								flexDirection: 'row',
-								marginTop: 50,
-								borderBottomWidth: 2,
-								borderBottomColor: '#ccc'
-							}}
-						>
-							<Text
-								style={{
-									fontSize: 20,
-									fontWeight: '300',
-									letterSpacing: 1,
-									color: '#ccc',
-									paddingBottom: 10
-								}}
-							>
-								Add up to three movies
-							</Text>
-						</View>
 						<SearchFunction />
 						<View
 							style={{

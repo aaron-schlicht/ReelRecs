@@ -88,183 +88,171 @@ const SearchModal: React.FC<{ isVisible: boolean; onClose: () => void }> = ({ is
 	};
 
 	return (
-		<Modal visible={isVisible} animationType="fade">
+		<View>
 			<View
 				style={{
-					width: '100%',
-					height: '100%',
-					alignItems: 'center',
-					backgroundColor: 'black'
+					flexDirection: 'row',
+					marginVertical: 15,
+					justifyContent: 'center',
+					gap: 10
 				}}
 			>
-				<StatusBar barStyle="light-content" />
-				<SafeAreaView style={{ width: '100%' }}>
-					<View
-						style={{
-							flexDirection: 'row',
-							marginVertical: 15,
-							justifyContent: 'center',
-							gap: 10
-						}}
-					>
-						<View
-							style={{
-								alignItems: 'center',
-								flexDirection: 'row',
-								borderRadius: 5,
-								borderWidth: 1,
-								borderColor: '#ccc',
-								height: 40,
-								width: 270,
-								padding: 8
-							}}
-						>
-							<Ionicons name="search" color="#ccc" size={15} />
-							<TextInput
-								keyboardAppearance="dark"
-								autoFocus
-								autoCapitalize="sentences"
-								autoCorrect={false}
-								placeholderTextColor="white"
-								style={styles.input}
-								onChangeText={(text) => handleChange(text)}
-								value={query}
-								returnKeyType="search"
-								onSubmitEditing={() => handleSearch()}
-								placeholder="Search movies..."
-							/>
-							{query.length > 0 ? (
-								<TouchableOpacity onPress={() => setQuery('')}>
-									<Ionicons name="close-circle" color="#ccc" size={18} />
-								</TouchableOpacity>
-							) : null}
-						</View>
-						<TouchableOpacity
-							style={{
-								height: 40,
-								justifyContent: 'center',
-								alignItems: 'center'
-							}}
-							onPress={() => onClose()}
-						>
-							<Text style={{ color: 'white' }}>Cancel</Text>
+				<View
+					style={{
+						alignItems: 'center',
+						flexDirection: 'row',
+						borderRadius: 5,
+						borderWidth: 1,
+						borderColor: '#ccc',
+						height: 40,
+						width: 270,
+						padding: 8
+					}}
+				>
+					<Ionicons name="search" color="#ccc" size={15} />
+					<TextInput
+						keyboardAppearance="dark"
+						autoFocus
+						autoCapitalize="sentences"
+						autoCorrect={false}
+						placeholderTextColor="white"
+						style={styles.input}
+						onChangeText={(text) => handleChange(text)}
+						value={query}
+						returnKeyType="search"
+						onSubmitEditing={() => handleSearch()}
+						placeholder="Search movies..."
+					/>
+					{query.length > 0 ? (
+						<TouchableOpacity onPress={() => setQuery('')}>
+							<Ionicons name="close-circle" color="#ccc" size={18} />
 						</TouchableOpacity>
-					</View>
-					<View
-						style={{
+					) : null}
+				</View>
+				<TouchableOpacity
+					style={{
+						height: 40,
+						justifyContent: 'center',
+						alignItems: 'center'
+					}}
+					onPress={() => onClose()}
+				>
+					<Text style={{ color: 'white' }}>Cancel</Text>
+				</TouchableOpacity>
+			</View>
+			<View
+				style={{
+					alignItems: 'center',
+					backgroundColor: '#1f2224',
+					height: '100%'
+				}}
+			>
+				{movies.length > 0 ? (
+					<ScrollView
+						contentContainerStyle={{
 							alignItems: 'center',
-							backgroundColor: '#1f2224',
-							height: '100%'
+							marginTop: 10,
+							marginHorizontal: 0,
+							width: '100%'
+							//justifyContent: 'center',
 						}}
 					>
-						{movies.length > 0 ? (
-							<ScrollView
-								contentContainerStyle={{
-									alignItems: 'center',
-									marginTop: 10,
-									marginHorizontal: 0,
-									width: '100%'
-									//justifyContent: 'center',
-								}}
-							>
-								<View
-									style={{
-										flexDirection: 'row',
-										flexWrap: 'wrap',
-										paddingHorizontal: 15,
-										justifyContent: 'center', //maybe center
-										marginBottom: 150
-									}}
-								>
-									{movies.map((movie, index) => {
-										if (!movie.poster_path) return null;
-										const isSelected = !!selectedMovie && selectedMovie.id === movie.id;
-										return (
-											<View key={`result-${index}`}>
-												{isSelected ? (
-													<Ionicons
-														position="absolute"
-														style={{
-															right: -2,
-															top: -11,
-															zIndex: 99
-														}}
-														name="checkmark-circle"
-														color="#ccc"
-														size={25}
-													/>
-												) : null}
-												<ImageButton movie={movie} onPress={onPress} isSelected={isSelected} />
-											</View>
-										);
-									})}
-								</View>
-							</ScrollView>
-						) : (
-							<Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold', marginTop: 30 }} />
-						)}
-					</View>
-					{!!selectedMovie ? (
 						<View
 							style={{
 								flexDirection: 'row',
-								display: 'flex',
-								flex: 1,
-								position: 'absolute',
-								bottom: 120,
-								width: '100%',
-								justifyContent: 'center',
-								zIndex: 99,
-								gap: 20
+								flexWrap: 'wrap',
+								paddingHorizontal: 15,
+								justifyContent: 'center', //maybe center
+								marginBottom: 150
 							}}
 						>
-							<TouchableHighlight
-								underlayColor="#6e7275"
-								style={{
-									backgroundColor: '#ccc',
-									padding: 10,
-									borderRadius: 5,
-									width: 120,
-									alignItems: 'center',
-									shadowOffset: { width: 0, height: 6 },
-									shadowColor: 'black',
-									shadowRadius: 10,
-									shadowOpacity: 0.6,
-									height: 50,
-									justifyContent: 'center'
-								}}
-								onPress={() => onSelectMovie(selectedMovie)}
-							>
-								<Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 1, color: '#1f2224' }}>
-									Done
-								</Text>
-							</TouchableHighlight>
-							<TouchableHighlight
-								underlayColor="#6e7275"
-								style={{
-									backgroundColor: '#ccc',
-									padding: 10,
-									borderRadius: 5,
-									width: 120,
-									alignItems: 'center',
-									shadowOffset: { width: 0, height: 6 },
-									shadowColor: 'black',
-									shadowRadius: 10,
-									shadowOpacity: 0.6,
-									justifyContent: 'center'
-								}}
-								onPress={() => onPressInfo(selectedMovie.id)}
-							>
-								<Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 1, color: '#1f2224' }}>
-									Info
-								</Text>
-							</TouchableHighlight>
+							{movies.map((movie, index) => {
+								if (!movie.poster_path) return null;
+								const isSelected = !!selectedMovie && selectedMovie.id === movie.id;
+								return (
+									<View key={`result-${index}`}>
+										{isSelected ? (
+											<Ionicons
+												position="absolute"
+												style={{
+													right: -2,
+													top: -11,
+													zIndex: 99
+												}}
+												name="checkmark-circle"
+												color="#ccc"
+												size={25}
+											/>
+										) : null}
+										<ImageButton movie={movie} onPress={onPress} isSelected={isSelected} />
+									</View>
+								);
+							})}
 						</View>
-					) : null}
-					<MovieScreen visible={movieVisible} onClose={onMovieScreenClose} movie={fullMovie} />
-				</SafeAreaView>
+					</ScrollView>
+				) : (
+					<Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold', marginTop: 30 }} />
+				)}
 			</View>
-		</Modal>
+			{!!selectedMovie ? (
+				<View
+					style={{
+						flexDirection: 'row',
+						display: 'flex',
+						flex: 1,
+						position: 'absolute',
+						bottom: 120,
+						width: '100%',
+						justifyContent: 'center',
+						zIndex: 99,
+						gap: 20
+					}}
+				>
+					<TouchableHighlight
+						underlayColor="#6e7275"
+						style={{
+							backgroundColor: '#ccc',
+							padding: 10,
+							borderRadius: 5,
+							width: 120,
+							alignItems: 'center',
+							shadowOffset: { width: 0, height: 6 },
+							shadowColor: 'black',
+							shadowRadius: 10,
+							shadowOpacity: 0.6,
+							height: 50,
+							justifyContent: 'center'
+						}}
+						onPress={() => onSelectMovie(selectedMovie)}
+					>
+						<Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 1, color: '#1f2224' }}>
+							Done
+						</Text>
+					</TouchableHighlight>
+					<TouchableHighlight
+						underlayColor="#6e7275"
+						style={{
+							backgroundColor: '#ccc',
+							padding: 10,
+							borderRadius: 5,
+							width: 120,
+							alignItems: 'center',
+							shadowOffset: { width: 0, height: 6 },
+							shadowColor: 'black',
+							shadowRadius: 10,
+							shadowOpacity: 0.6,
+							justifyContent: 'center'
+						}}
+						onPress={() => onPressInfo(selectedMovie.id)}
+					>
+						<Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: 1, color: '#1f2224' }}>
+							Info
+						</Text>
+					</TouchableHighlight>
+				</View>
+			) : null}
+			<MovieScreen visible={movieVisible} onClose={onMovieScreenClose} movie={fullMovie} />
+		</View>
 	);
 };
 
