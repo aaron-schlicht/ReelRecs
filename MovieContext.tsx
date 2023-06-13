@@ -1,22 +1,22 @@
 import { createContext, useState } from 'react';
-import { Movie, WatchProvider } from './constants';
+import { Movie, WatchProvider, FullMovie } from './constants';
 
 interface MovieContextProps {
-	selectedMovies: Movie[];
-	similarMovies: Movie[];
+	selectedMovie: Movie | null;
+	similarMovies: FullMovie[];
 	selectedServices: WatchProvider[];
-	updateSelectedMovies: (movie: Movie) => void;
-	updateSimilarMovies: (movie: Movie[]) => void;
+	updateSelectedMovie: (movie: Movie) => void;
+	updateSimilarMovies: (movie: FullMovie[]) => void;
 	updateSelectedServices: (provider: WatchProvider) => void;
 	removeSelectedMovie: (movie: Movie) => void;
 	onNewSearch: () => void;
 }
 
 export const MovieContext = createContext<MovieContextProps>({
-	selectedMovies: [],
+	selectedMovie: null,
 	similarMovies: [],
 	selectedServices: [],
-	updateSelectedMovies: () => {},
+	updateSelectedMovie: () => {},
 	updateSimilarMovies: () => {},
 	updateSelectedServices: () => {},
 	removeSelectedMovie: () => {},
@@ -28,14 +28,14 @@ export interface MovieProviderProps {
 }
 
 const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
-	const [ selectedMovies, setSelectedMovies ] = useState<Movie[]>([]);
-	const [ similarMovies, setSimilarMovies ] = useState<Movie[]>([]);
+	const [ selectedMovie, setSelectedMovie ] = useState<Movie | null>(null);
+	const [ similarMovies, setSimilarMovies ] = useState<FullMovie[]>([]);
 	const [ selectedServices, setSelectedServices ] = useState<WatchProvider[]>([]);
 
-	const updateSelectedMovies = (movie: Movie) => {
-		setSelectedMovies([ ...selectedMovies, movie ]);
+	const updateSelectedMovie = (movie: Movie) => {
+		setSelectedMovie(movie);
 	};
-	const updateSimilarMovies = (movies: Movie[]) => {
+	const updateSimilarMovies = (movies: FullMovie[]) => {
 		setSimilarMovies(movies);
 	};
 
@@ -50,20 +50,20 @@ const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
 	};
 
 	const removeSelectedMovie = (movie: Movie) => {
-		setSelectedMovies(selectedMovies.filter((m) => m.id !== movie.id));
+		setSelectedMovie(null);
 	};
 
 	const onNewSearch = () => {
-		setSelectedMovies([]);
+		setSelectedMovie(null);
 		setSelectedServices([]);
 	};
 
 	return (
 		<MovieContext.Provider
 			value={{
-				selectedMovies,
+				selectedMovie,
 				similarMovies,
-				updateSelectedMovies,
+				updateSelectedMovie,
 				updateSimilarMovies,
 				selectedServices,
 				updateSelectedServices,
