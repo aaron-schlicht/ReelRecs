@@ -1,9 +1,9 @@
 import React from 'react';
 import MovieProvider from './MovieContext';
-import Home from './Home';
+import Home from './Components/Home';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-import SimilarMoviesScreen from './SimilarMoviesScreen';
+import SimilarMoviesScreen from './Components/SimilarMovies';
 const Stack = createStackNavigator();
 
 export default function App() {

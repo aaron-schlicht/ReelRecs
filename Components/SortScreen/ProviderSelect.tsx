@@ -1,7 +1,7 @@
-import { View, ScrollView, Text, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
+import { View, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
 import { useContext } from 'react';
-import { MovieContext } from './MovieContext';
-import { WatchProvider, Providers } from './constants';
+import { MovieContext } from '../../MovieContext';
+import { Providers } from '../../constants';
 import * as Haptics from 'expo-haptics';
 
 export default function ProviderSelect() {
