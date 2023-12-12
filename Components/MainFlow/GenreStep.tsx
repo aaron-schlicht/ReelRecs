@@ -26,11 +26,14 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as Haptics from "expo-haptics";
 import { useLazyGetKeywordSearchResultsQuery } from "../../redux/apiSlice";
+import KeywordSearch from "./KeywordSearch";
+import { LinearGradient } from "expo-linear-gradient";
+import { RootState } from "../../redux/store";
 
 const GenreStep = () => {
-  const { genres, keywords, activeList } = useSelector(
-    (state: any) => state.flow
-  );
+  const genres = useSelector((state: RootState) => state.flow.genres);
+  const activeList = useSelector((state: RootState) => state.flow.activeList);
+  const keywords = useSelector((state: RootState) => state.flow.keywords);
   const dispatch = useDispatch();
   const scrollViewRef = useRef<ScrollView>(null);
   const [scrollPos, setScrollPos] = useState<number>(0);
@@ -71,39 +74,38 @@ const GenreStep = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 10 }}>
+    <View style={{ flex: 1 }}>
       <Text
         style={{
           color: "white",
           textAlign: "center",
-          fontSize: 20,
+          fontSize: 16,
           fontWeight: "bold",
         }}
       >
-        Start finding a movie by genre
+        Use genres and keywords to find movies
       </Text>
-      <View>
-        <TextInput
-          style={{
-            padding: 10,
-            paddingLeft: 20,
-            backgroundColor: "#252942",
-            borderRadius: 15,
-            marginTop: 15,
-            fontSize: 16,
-            height: 50,
-            color: "white",
-          }}
-          placeholder={`Search keywords... Try "Spies"`}
-        />
-      </View>
+      <KeywordSearch />
       <FlatList
-        data={activeList}
+        data={[
+          ...activeList.filter(
+            (item: { name: string; id: number }, index: number) => {
+              return (
+                index ===
+                activeList.findIndex(
+                  (key: { name: string; id: number }) => key.id === item.id
+                )
+              );
+            }
+          ),
+        ]}
         numColumns={3}
         horizontal={false}
         refreshing={refreshing}
         onRefresh={onRefresh}
-        style={{ marginTop: 20 }}
+        style={{ marginTop: 10 }}
+        contentContainerStyle={{ paddingBottom: 65 }}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           const { id, name } = item;
           const genre = Genres[id];
@@ -114,52 +116,59 @@ const GenreStep = () => {
                   genre={genre}
                   handleSelect={handleGenreSelect}
                   isActive={
-                    genres.filter((g: Genre) => g.id === genre.id).length
+                    !!genres.filter((g: Genre) => g.id === genre.id).length
                   }
                 />
               </View>
             );
           }
-          const keyword = Object.values(KeywordMap)
-            .flat()
-            .find((key: Keyword) => key.id === id)!;
-
           return (
             <View style={{ width: "33%" }} key={`keyword-${id}`}>
               <KeywordButton
-                keyword={keyword}
+                keyword={{ ...item }}
                 handleSelect={handleKeywordSelect}
-                isActive={
-                  keywords.filter((k: Keyword) => k.id == keyword.id).length
-                }
+                isActive={!!keywords.filter((k: Keyword) => k.id == id).length}
               />
             </View>
           );
         }}
       />
-      {!genres.length ? null : (
+      {!genres.length && !keywords.length ? null : (
         <View
           style={{
             position: "absolute",
-            bottom: 30,
-            alignItems: "center",
+            bottom: 0,
+            alignSelf: "center",
+            width: "120%",
           }}
         >
-          <TouchableHighlight
+          <LinearGradient
             style={{
-              backgroundColor: "white",
-              width: 150,
-              borderRadius: 15,
-              padding: 10,
+              width: "100%",
+              height: 100,
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 10,
             }}
+            colors={["transparent", "rgba(21, 24, 45, 0.5)"]}
           >
-            <Text
-              style={{ textAlign: "center", fontWeight: "500", fontSize: 25 }}
+            <TouchableHighlight
+              style={{
+                backgroundColor: "white",
+                width: 150,
+                borderRadius: 30,
+                padding: 10,
+              }}
+              underlayColor="rgba(255,255,255,0.8)"
               onPress={handleNext}
             >
-              Next
-            </Text>
-          </TouchableHighlight>
+              <Text
+                style={{ textAlign: "center", fontWeight: "500", fontSize: 25 }}
+              >
+                Next
+              </Text>
+            </TouchableHighlight>
+          </LinearGradient>
         </View>
       )}
     </View>
@@ -246,59 +255,3 @@ const KeywordButton = ({
 };
 
 export default GenreStep;
-
-/*
-
-
-  <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        ref={scrollViewRef}
-      >
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            rowGap: 12,
-            columnGap: 15,
-          }}
-        >
-          {activeList.map((value: { id: number; name: string }) => {
-            const { id, name } = value;
-            const genre = Genres[id];
-            if (genre) {
-              return (
-                <View style={{ flexGrow: 1 }} key={`genre-${genre.id}`}>
-                  <GenreButton
-                    genre={genre}
-                    handleSelect={handleGenreSelect}
-                    isActive={
-                      genres.filter((g: Genre) => g.id === genre.id).length
-                    }
-                  />
-                </View>
-              );
-            }
-            const keyword = Object.values(KeywordMap)
-              .flat()
-              .find((key: Keyword) => key.id === id);
-            if (keyword) {
-              return (
-                <View style={{ flexGrow: 1 }} key={`keyword-${id}`}>
-                  <KeywordButton
-                    keyword={keyword}
-                    handleSelect={handleKeywordSelect}
-                    isActive={
-                      keywords.filter((k: Keyword) => k.id == keyword.id).length
-                    }
-                  />
-                </View>
-              );
-            }
-          })}
-        </View>
-      </ScrollView>
-
-*/

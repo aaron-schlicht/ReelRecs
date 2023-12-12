@@ -1,25 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
 import {
-  Movie,
-  FullMovie,
-  WatchProvider,
-  Genre,
-  Genres,
-  Keyword,
-  KeywordMap,
-} from "../constants";
+  createEntityAdapter,
+  createSelector,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { Genre, Genres, Keyword, KeywordMap } from "../constants";
 
-interface InitialType {
+interface Filter {
+  [key: string]: {
+    min: number;
+    max: number;
+  };
+}
+
+export interface InitialFlowType {
   step: number;
   genres: Genre[];
   keywords: Keyword[];
   activeList: { name: string; id: number }[];
+  filters: Filter;
 }
 
-const initialState: InitialType = {
+const initialState: InitialFlowType = {
   step: 0,
   genres: [],
   keywords: [],
+  filters: {},
   activeList: [
     ...Object.values(Genres).sort((a, b) => {
       if (a.name < b.name) {
@@ -91,8 +96,21 @@ export const flowSlice = createSlice({
       let currList = state.activeList;
       state.activeList = [action.payload, ...currList];
     },
-    resetFlow: (state) => {
+    resetFlow: () => {
       return initialState;
+    },
+    updateFilters: (state, action) => {
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          [action.payload.name]: {
+            ...state.filters[action.payload.name],
+            min: action.payload.min,
+            max: action.payload.max,
+          },
+        },
+      };
     },
   },
 });
@@ -103,6 +121,7 @@ export const {
   updateKeywords,
   addKeyword,
   resetFlow,
+  updateFilters,
 } = flowSlice.actions;
 
 export default flowSlice.reducer;

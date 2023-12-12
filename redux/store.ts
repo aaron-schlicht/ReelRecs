@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import movieReducer from "./movieSlice";
 import flowReducer from "./flowSlice";
 import { apiSlice } from "./apiSlice";
@@ -12,3 +12,10 @@ export default configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
 });
+
+const rootReducer = combineReducers({
+  movies: movieReducer,
+  flow: flowReducer,
+});
+
+export type RootState = ReturnType<typeof rootReducer>;

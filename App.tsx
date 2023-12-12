@@ -4,9 +4,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import SimilarMoviesScreen from "./Components/SimilarMovies";
 //import mobileAds from "react-native-google-mobile-ads";
-const Stack = createStackNavigator();
+
+export type RootStackParamList = {
+  Home: undefined;
+  Recs: undefined;
+};
+const Stack = createStackNavigator<RootStackParamList>();
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import RecsScreen from "./Components/MainFlow/RecsScreen";
 
 export default function App() {
   //mobileAds().initialize();
@@ -19,6 +25,11 @@ export default function App() {
             options={{ headerShown: false }}
             name="Home"
             component={Home}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Recs"
+            component={RecsScreen}
           />
         </Stack.Navigator>
       </Provider>

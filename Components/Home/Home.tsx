@@ -9,11 +9,12 @@ import Lucky from "../Lucky/Lucky";
 import SearchButton from "../Search/SearchButton";
 import { useSelector } from "react-redux";
 import MainFlow from "../MainFlow/MainFlow";
+import { RootState } from "../../redux/store";
 
 const HOME = "home";
 
 export default function Home() {
-  const { focus } = useSelector((state: any) => state.movies);
+  const focus = useSelector((state: RootState) => state.movies.focus);
   return (
     <View style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>

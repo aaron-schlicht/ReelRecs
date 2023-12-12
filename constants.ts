@@ -38,24 +38,77 @@ export const Providers: WatchProvider[] = [
   {
     provider_id: 8,
     name: "Netflix",
-    logo_url: require("./assets/netflix.png"),
+    logo_url: "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg",
   },
   {
     provider_id: 9,
     name: "Prime Video",
-    logo_url: require("./assets/prime_video.png"),
+    logo_url: "/emthp39XA2YScoYL1p0sdbAH2WA.jpg",
   },
   {
     provider_id: 337,
     name: "Disney Plus",
-    logo_url: require("./assets/disney_plus.jpeg"),
+    logo_url: "/7rwgEs15tFwyR9NPQ5vpzxTj19Q.jpg",
   },
-  { provider_id: 384, name: "HBO Max", logo_url: require("./assets/max.png") },
-  { provider_id: 15, name: "Hulu", logo_url: require("./assets/hulu.jpeg") },
+  {
+    provider_id: 1899,
+    name: "Max",
+    logo_url: "/6Q3ZYUNA9Hsgj6iWnVsw2gR5V6z.jpg",
+  },
+  {
+    provider_id: 15,
+    name: "Hulu",
+    logo_url: "/zxrVdFjIjLqkfnwyghnfywTn3Lh.jpg",
+  },
   {
     provider_id: 387,
     name: "Peacock",
-    logo_url: require("./assets/peacock.png"),
+    logo_url: "/8VCV78prwd9QzZnEm0ReO6bERDa.jpg",
+  },
+  {
+    provider_id: 350,
+    name: "Apple TV Plus",
+    logo_url: "/6uhKBfmtzFqOcLousHwZuzcrScK.jpg",
+  },
+  {
+    provider_id: 531,
+    name: "Paramount Plus",
+    logo_url: "/xbhHHa1YgtpwhC8lb1NQ3ACVcLd.jpg",
+  },
+  {
+    provider_id: 526,
+    name: "AMC+",
+    logo_url: "/xlonQMSmhtA2HHwK3JKF9ghx7M8.jpg",
+  },
+  {
+    provider_id: 43,
+    name: "Starz",
+    logo_url: "/eWp5LdR4p4uKL0wACBBXapDV2lB.jpg",
+  },
+  {
+    provider_id: 37,
+    name: "Showtime",
+    logo_url: "/4kL33LoKd99YFIaSOoOPMQOSw1A.jpg",
+  },
+  {
+    provider_id: 73,
+    name: "Tubi TV",
+    logo_url: "/w2TDH9TRI7pltf5LjN3vXzs7QbN.jpg",
+  },
+  {
+    provider_id: 300,
+    name: "Pluto TV",
+    logo_url: "/t6N57S17sdXRXmZDAkaGP0NHNG0.jpg",
+  },
+  {
+    provider_id: 258,
+    name: "Criterion Channel",
+    logo_url: "/scMgbnNpkzdvhhqlQV3EjmByBXF.jpg",
+  },
+  {
+    provider_id: 191,
+    name: "Kanopy",
+    logo_url: "/wbCleYwRFpUtWcNi7BLP3E1f6VI.jpg",
   },
 ];
 
@@ -161,7 +214,7 @@ export const GenreIcons: { [key: number]: string } = {
   10751: "👨‍👩‍👧‍👦",
   14: "🏰",
   36: "📜",
-  27: "😨",
+  27: "👻",
   10402: "🎶",
   9648: "🔍",
   10749: "❤️",

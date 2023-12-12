@@ -23,23 +23,19 @@ export const movieSlice = createSlice({
       return { ...state, selectedMovie: action.payload };
     },
     updateSimilarMovies: (state, action) => {
-      return { ...state, similarMovies: action.payload };
+      state.similarMovies = [...action.payload];
     },
     updateSelectedServices: (state, action) => {
-      if (!state.selectedServices.includes(action.payload)) {
-        return {
-          ...state,
-          selectedServices: [...state.selectedServices, action.payload],
-        };
+      if (
+        !!state.selectedServices.find(
+          (s) => s.provider_id === action.payload.provider_id
+        )
+      ) {
+        state.selectedServices = state.selectedServices.filter(
+          (s) => s.provider_id !== action.payload.provider_id
+        );
       } else {
-        return {
-          ...state,
-          selectedServices: [
-            ...state.selectedServices.filter(
-              (p) => p.provider_id !== action.payload.provider_id
-            ),
-          ],
-        };
+        state.selectedServices.push(action.payload);
       }
     },
     updateFocus: (state, action) => {

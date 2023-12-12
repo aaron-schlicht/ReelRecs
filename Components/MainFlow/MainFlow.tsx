@@ -1,17 +1,19 @@
 import { View, Text } from "react-native";
 import GenreStep from "./GenreStep";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import KeywordStep from "./KeywordStep";
+import FilterStep from "./FilterStep";
+import { RootState } from "../../redux/store";
 
 const MainFlow = () => {
-  const { step } = useSelector((state: any) => state.flow);
+  const step = useSelector((state: RootState) => state.flow.step);
 
   const CurrentStep = () => {
     switch (step) {
       case 0:
         return <GenreStep />;
       case 1:
-        return <KeywordStep />;
+        return <FilterStep />;
     }
   };
   return (
@@ -22,7 +24,7 @@ const MainFlow = () => {
         paddingHorizontal: 5,
       }}
     >
-      <GenreStep />
+      <CurrentStep />
     </View>
   );
 };
