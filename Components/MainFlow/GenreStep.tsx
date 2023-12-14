@@ -25,7 +25,6 @@ import {
 } from "../../constants";
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as Haptics from "expo-haptics";
-import { useLazyGetKeywordSearchResultsQuery } from "../../redux/apiSlice";
 import KeywordSearch from "./KeywordSearch";
 import { LinearGradient } from "expo-linear-gradient";
 import { RootState } from "../../redux/store";
@@ -46,9 +45,6 @@ const GenreStep = () => {
       dispatch(resetFlow());
     }, 500);
   }, []);
-
-  const [getKeywordSearchResults, results] =
-    useLazyGetKeywordSearchResultsQuery();
 
   useEffect(() => {
     scrollViewRef.current?.scrollTo({ y: scrollPos, animated: false });
@@ -78,12 +74,12 @@ const GenreStep = () => {
       <Text
         style={{
           color: "white",
-          textAlign: "center",
-          fontSize: 16,
+          fontSize: 25,
           fontWeight: "bold",
+          paddingHorizontal: 10,
         }}
       >
-        Use genres and keywords to find movies
+        Discover movies by genre
       </Text>
       <KeywordSearch />
       <FlatList

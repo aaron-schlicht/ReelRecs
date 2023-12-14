@@ -7,12 +7,15 @@ import SimilarMoviesScreen from "./Components/SimilarMovies";
 
 export type RootStackParamList = {
   Home: undefined;
-  Recs: undefined;
+  Recs: { recs: Movie[] };
+  Movie: { id: number };
 };
 const Stack = createStackNavigator<RootStackParamList>();
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import RecsScreen from "./Components/MainFlow/RecsScreen";
+import { Movie } from "./constants";
+import MovieScreen from "./Components/MainFlow/MovieScreen";
 
 export default function App() {
   //mobileAds().initialize();
@@ -29,7 +32,14 @@ export default function App() {
           <Stack.Screen
             options={{ headerShown: false }}
             name="Recs"
+            initialParams={{ recs: [] }}
             component={RecsScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="Movie"
+            initialParams={{ id: 0 }}
+            component={MovieScreen}
           />
         </Stack.Navigator>
       </Provider>

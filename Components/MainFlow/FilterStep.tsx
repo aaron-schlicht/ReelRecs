@@ -29,9 +29,15 @@ const FilterStep = () => {
   const { getRecommendations } = useGetRecommendations();
 
   const handleNextStep = async () => {
-    await getRecommendations();
-    navigation.navigate("Recs");
-    dispatch(resetFlow());
+    try {
+      const recs = await getRecommendations();
+      if (recs) {
+        navigation.navigate("Recs", { recs: recs });
+        dispatch(resetFlow());
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

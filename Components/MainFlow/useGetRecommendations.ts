@@ -62,12 +62,13 @@ const useGetRecommendations = () => {
     }
     if (!!selectedServices.length) {
       queryString += `&watch_region=US`;
-      queryString += `&with_watch_providers=${selectedServices.map(
-        (service, index) =>
+      queryString += `&with_watch_providers=${selectedServices
+        .map((service, index) =>
           index === selectedServices.length - 1
             ? `${service.provider_id}`
             : `${service.provider_id}|`
-      )}`;
+        )
+        .join("")}`;
     }
     return queryString;
   };
@@ -78,7 +79,8 @@ const useGetRecommendations = () => {
     try {
       const response = await axios.get(queryString);
       if (response && response.data) {
-        dispatch(updateSimilarMovies(response.data.results as Movie[]));
+        //dispatch(updateSimilarMovies(response.data.results as Movie[]));
+        return response.data.results as Movie[];
       }
     } catch (error) {
       console.log(error);

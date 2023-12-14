@@ -35,6 +35,9 @@ export const apiSlice = createApi({
     getKeywordSearchResults: builder.query<KeywordSearchResults, string>({
       query: (str) => `/search/keyword?api_key=${API_KEY}&query=${str}&page=1`,
     }),
+    getMovieRating: builder.query<any, number>({
+      query: (id) => `/movie/${id}/release_dates?api_key=${API_KEY}`,
+    }),
   }),
 });
 
@@ -45,4 +48,5 @@ export const {
   useGetProvidersQuery,
   useGetKeywordSearchResultsQuery,
   useLazyGetKeywordSearchResultsQuery,
+  useGetMovieRatingQuery,
 } = apiSlice;

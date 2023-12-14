@@ -36,20 +36,15 @@ const KeywordSearch = () => {
   const dispatch = useDispatch();
   const { keywords } = useSelector((state: any) => state.flow);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-  }, [data]);
-
   const handleSelect = (selectedValue: Keyword) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    console.log(selectedValue);
     dispatch(updateKeywords(selectedValue));
     dispatch(addKeyword(selectedValue));
   };
 
   return (
-    <View style={{ marginTop: 15 }}>
+    <View style={{ marginTop: 15, paddingHorizontal: 5 }}>
       {isFocused ? (
         <View
           style={{

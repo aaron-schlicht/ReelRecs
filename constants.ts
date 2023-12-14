@@ -7,6 +7,7 @@ export interface Movie {
   vote_average: number;
   release_date: string;
   serviceIds?: number[];
+  genre_ids?: number[];
 }
 
 export interface FullMovie {
@@ -20,6 +21,8 @@ export interface FullMovie {
   runtime?: number;
   tagline?: string;
   services?: Service[];
+  backdrop_path?: string;
+  genres?: Genre[];
 }
 
 export interface Service {
@@ -185,10 +188,6 @@ export const Genres: { [id: string]: Genre } = {
     id: 878,
     name: "Science Fiction",
   },
-  10770: {
-    id: 10770,
-    name: "TV Movie",
-  },
   53: {
     id: 53,
     name: "Thriller",
@@ -219,7 +218,6 @@ export const GenreIcons: { [key: number]: string } = {
   9648: "🔍",
   10749: "❤️",
   878: "👽",
-  10770: "📺",
   53: "💣",
   10752: "🪖",
   37: "🤠",
@@ -752,28 +750,56 @@ export const Quotes: Quote[] = [
 export const KeywordMap: { [genre: string]: Keyword[] } = {
   28: [
     {
-      id: 325402,
-      name: "car chase",
+      id: 9715,
+      name: "superhero",
     },
     {
       id: 779,
       name: "martial arts",
     },
     {
-      id: 225356,
-      name: "epic fights",
+      id: 10617,
+      name: "disaster",
     },
     {
-      id: 285486,
-      name: "explosions",
+      id: 6149,
+      name: "police",
+    },
+    {
+      id: 162365,
+      name: "military",
     },
     {
       id: 12371,
       name: "gunfight",
     },
     {
-      id: 314517,
-      name: "high octane",
+      id: 9748,
+      name: "revenge",
+    },
+    {
+      id: 3713,
+      name: "chase",
+    },
+    {
+      id: 10292,
+      name: "gore",
+    },
+    {
+      id: 1701,
+      name: "hero",
+    },
+    {
+      id: 470,
+      name: "spy",
+    },
+    {
+      id: 314730,
+      name: "suspenseful",
+    },
+    {
+      id: 9672,
+      name: "based on true story",
     },
   ],
   12: [
@@ -782,12 +808,12 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "quest",
     },
     {
-      id: 4759,
-      name: "exploration",
+      id: 12988,
+      name: "pirate",
     },
     {
-      id: 215470,
-      name: "treasure hunter",
+      id: 1454,
+      name: "treasure",
     },
     {
       id: 189092,
@@ -798,8 +824,12 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "hero",
     },
     {
-      id: 162342,
-      name: "discovery",
+      id: 10084,
+      name: "rescue",
+    },
+    {
+      id: 9672,
+      name: "based on true story",
     },
   ],
   16: [
@@ -816,12 +846,8 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "claymation",
     },
     {
-      id: 259345,
-      name: "kids cartoon",
-    },
-    {
-      id: 325427,
-      name: "animated",
+      id: 210024,
+      name: "anime",
     },
   ],
   35: [
@@ -834,32 +860,40 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "buddy comedy",
     },
     {
-      id: 304995,
-      name: "feel good",
+      id: 9253,
+      name: "slapstick comedy",
     },
     {
-      id: 263359,
-      name: "office comedy",
+      id: 10123,
+      name: "dark comedy",
     },
     {
-      id: 9716,
-      name: "stand-up comedy",
+      id: 11800,
+      name: "mockumentary",
     },
     {
-      id: 9799,
-      name: "romantic comedy",
+      id: 7312,
+      name: "road trip",
     },
     {
-      id: 235810,
-      name: "comedic relief",
+      id: 9755,
+      name: "parody",
     },
     {
-      id: 270561,
-      name: "situation-comedy",
+      id: 11860,
+      name: "fish out of water",
     },
     {
-      id: 316058,
-      name: "raunchy comedy",
+      id: 10683,
+      name: "coming of age",
+    },
+    {
+      id: 6075,
+      name: "sports",
+    },
+    {
+      id: 9672,
+      name: "based on true story",
     },
   ],
   80: [
@@ -876,6 +910,14 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "organized crime",
     },
     {
+      id: 9807,
+      name: "film noir",
+    },
+    {
+      id: 207268,
+      name: "neo-noir",
+    },
+    {
       id: 5340,
       name: "investigation",
     },
@@ -883,12 +925,24 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       id: 1568,
       name: "undercover",
     },
+    {
+      id: 3149,
+      name: "gangster",
+    },
+    {
+      id: 314730,
+      name: "suspenseful",
+    },
+    {
+      id: 703,
+      name: "detective",
+    },
+    {
+      id: 9672,
+      name: "based on true story",
+    },
   ],
   99: [
-    {
-      id: 18257,
-      name: "educational",
-    },
     {
       id: 272851,
       name: "environmental documentary",
@@ -898,8 +952,8 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "social documentary",
     },
     {
-      id: 11800,
-      name: "mockumentary",
+      id: 239902,
+      name: "political documentary",
     },
     {
       id: 195240,
@@ -907,14 +961,6 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
     },
   ],
   18: [
-    {
-      id: 303624,
-      name: "emotional",
-    },
-    {
-      id: 278680,
-      name: "character driven",
-    },
     {
       id: 14534,
       name: "relationship",
@@ -924,70 +970,95 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "period drama",
     },
     {
+      id: 10614,
+      name: "tragedy",
+    },
+    {
       id: 222517,
       name: "legal drama",
+    },
+    {
+      id: 10683,
+      name: "coming of age",
+    },
+    {
+      id: 5565,
+      name: "biography",
+    },
+    {
+      id: 6075,
+      name: "sports",
+    },
+    {
+      id: 9672,
+      name: "based on true story",
     },
   ],
   10751: [
     {
-      id: 315304,
-      name: "happy",
+      id: 10683,
+      name: "coming of age",
     },
     {
-      id: 319357,
-      name: "heartwarming",
+      id: 6075,
+      name: "sports",
     },
     {
-      id: 240629,
-      name: "family bonding",
+      id: 9672,
+      name: "based on true story",
+    },
+    {
+      id: 6513,
+      name: "cartoon",
+    },
+    {
+      id: 4344,
+      name: "musical",
     },
   ],
   14: [
     {
-      id: 297556,
-      name: "mythical creatures",
+      id: 2035,
+      name: "mythology",
     },
     {
-      id: 314844,
-      name: "wizardry",
+      id: 177912,
+      name: "wizard",
     },
     {
-      id: 224389,
-      name: "imaginary world",
+      id: 234213,
+      name: "sword and sorcery",
     },
     {
       id: 211227,
       name: "high fantasy",
     },
     {
-      id: 297028,
-      name: "epic fantasy",
+      id: 177895,
+      name: "dark fantasy",
     },
     {
-      id: 298506,
-      name: "historical fantasy",
+      id: 3205,
+      name: "fairy tale",
     },
   ],
   36: [
-    {
-      id: 159289,
-      name: "historical event",
-    },
     {
       id: 12995,
       name: "historical fiction",
     },
     {
-      id: 286194,
-      name: "period piece",
+      id: 15060,
+      name: "period drama",
     },
     {
-      id: 179300,
-      name: "ancient civilization",
+      id: 282071,
+      name: "biblical",
     },
+    { id: 6917, name: "epic" },
     {
-      id: 298523,
-      name: "historical war",
+      id: 1405,
+      name: "roman empire",
     },
   ],
   27: [
@@ -1019,6 +1090,13 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       id: 50009,
       name: "survival horror",
     },
+    { id: 12339, name: "slasher" },
+    { id: 3133, name: "vampire" },
+    { id: 163053, name: "found footage" },
+    { id: 162846, name: "ghost" },
+    { id: 156174, name: "occult" },
+    { id: 12377, name: "zombie" },
+    { id: 6158, name: "cult" },
   ],
   10402: [
     {
@@ -1034,16 +1112,8 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "musician",
     },
     {
-      id: 252954,
-      name: "band competition",
-    },
-    {
       id: 18001,
       name: "rock band",
-    },
-    {
-      id: 320544,
-      name: "perfomance",
     },
   ],
   9648: [
@@ -1056,20 +1126,24 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "whodunit",
     },
     {
-      id: 294213,
-      name: "political mystery",
-    },
-    {
-      id: 309010,
-      name: "hidden clues",
-    },
-    {
       id: 207046,
       name: "murder mystery",
     },
     {
-      id: 310107,
-      name: "enigma",
+      id: 314730,
+      name: "suspenseful",
+    },
+    {
+      id: 9807,
+      name: "film noir",
+    },
+    {
+      id: 207268,
+      name: "neo-noir",
+    },
+    {
+      id: 12565,
+      name: "psychological thriller",
     },
   ],
   10749: [
@@ -1078,35 +1152,34 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "romantic comedy",
     },
     {
-      id: 287476,
-      name: "heartfelt",
-    },
-    {
       id: 128,
       name: "love triangle",
     },
     {
-      id: 267461,
-      name: "happy ending",
+      id: 14534,
+      name: "relationship",
     },
+    {
+      id: 15060,
+      name: "period drama",
+    },
+    {
+      id: 10614,
+      name: "tragedy",
+    },
+    { id: 6917, name: "epic" },
   ],
   878: [
     {
       id: 161176,
       name: "space opera",
     },
+    { id: 4565, name: "dystopia" },
     {
-      id: 192260,
-      name: "futuristic society",
+      id: 9951,
+      name: "alien",
     },
-    {
-      id: 273439,
-      name: "aliens",
-    },
-    {
-      id: 287271,
-      name: "robots",
-    },
+    { id: 14544, name: "robot" },
     {
       id: 4379,
       name: "time travel",
@@ -1115,28 +1188,8 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       id: 1576,
       name: "technology",
     },
-  ],
-  10770: [
-    {
-      id: 323309,
-      name: "made for tv",
-    },
-    {
-      id: 221976,
-      name: "tv series reunion",
-    },
-    {
-      id: 269769,
-      name: "based on tv series",
-    },
-    {
-      id: 171261,
-      name: "television broadcast",
-    },
-    {
-      id: 325688,
-      name: "recorded event",
-    },
+    { id: 310, name: "artificial intelligence (a.i.)" },
+    { id: 12190, name: "cyberpunk" },
   ],
   53: [
     {
@@ -1148,20 +1201,22 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "psychological thriller",
     },
     {
-      id: 325425,
-      name: "edge-of-your-seat",
+      id: 314730,
+      name: "suspenseful",
+    },
+    { id: 470, name: "spy" },
+    {
+      id: 10950,
+      name: "shootout",
+    },
+    { id: 4776, name: "race against time" },
+    {
+      id: 9748,
+      name: "revenge",
     },
     {
-      id: 275311,
-      name: "plot twist",
-    },
-    {
-      id: 241602,
-      name: "ticking clock",
-    },
-    {
-      id: 241037,
-      name: "time thriller",
+      id: 3713,
+      name: "chase",
     },
   ],
   10752: [
@@ -1182,9 +1237,10 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       name: "aerial combat",
     },
     {
-      id: 260091,
-      name: "historical battle",
+      id: 9672,
+      name: "based on true story",
     },
+    { id: 6917, name: "epic" },
   ],
   37: [
     {
@@ -1199,14 +1255,13 @@ export const KeywordMap: { [genre: string]: Keyword[] } = {
       id: 156212,
       name: "spaghetti western",
     },
+    { id: 1502, name: "marshal" },
     {
       id: 155573,
       name: "wild west",
     },
-    {
-      id: 236855,
-      name: "gang of outlaws",
-    },
+    { id: 9503, name: "outlaw" },
+    { id: 6917, name: "epic" },
     {
       id: 10950,
       name: "shootout",
